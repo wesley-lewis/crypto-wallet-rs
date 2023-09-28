@@ -32,7 +32,7 @@ async fn main() -> Result<()> {
     let block_number = web3_con.eth().block_number().await?;
     println!("Block number: {}", &block_number);
 
-    let balance = loaded_wallet.get_balance(&web3_con).await?;
+    let balance = loaded_wallet.get_balance_in_eth(&web3_con).await?;
     println!("Wallet balance: {}", &balance);
     
     Ok(())
