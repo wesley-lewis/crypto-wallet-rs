@@ -61,6 +61,13 @@ impl Wallet {
         let pub_key = PublicKey::from_str(&self.public_key)?;
         Ok(pub_key)
     }
+    
+    pub async fn get_balance(&self, web3_connection: &Web3<WebSocket>) -> Result<U256> {
+        let wallet_address = Address::from_str(&self.public_address)?;
+        let balance = web3_connection.eth().balance(wallet_address, None).await?;
+
+        Ok(balance)
+    }
 }
 
 pub fn generate_keypair() -> (SecretKey, PublicKey) {
