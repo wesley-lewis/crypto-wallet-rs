@@ -1,7 +1,11 @@
 use secp256k1::{ rand::{rngs, SeedableRng}, PublicKey, SecretKey};
-
+use anyhow::{bail, Result};
 use tiny_keccak::keccak256;
 use web3::types::Address;
+use serde::{Serialize, Deserialize};
+use std::io::BufWriter;
+use std::str::FromStr;
+use std::{fs::OpenOptions, io::BufReader};
 
 pub fn generate_keypair() -> (SecretKey, PublicKey) {
     let secp = secp256k1::Secp256k1::new();
