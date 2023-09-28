@@ -1,8 +1,11 @@
 use anyhow::Result;
+use dotenv;
 mod eth_wallet;
 mod utils;
 
 fn main() -> Result<()> {
+    dotenv::dotenv().ok();
+    
     let (secret_key, pub_key) = eth_wallet::generate_keypair();
 
     println!("Secret key: {}", &secret_key.to_string());
